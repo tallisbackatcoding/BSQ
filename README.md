@@ -111,7 +111,7 @@ void copyToBitFieldFromStr(int *bitField, char *str, int strSize, int index){
 ---
 ## tests
 
-- testing with 1k x 1k matrix and density -1
+- testing with 1k x 1k matrix and density 10
 
 <img src="test2.png" width = 400 height = 200>
 
