@@ -118,11 +118,11 @@ void copyToBitFieldFromStr(int *bitField, char *str, int strSize, int index){
 
 - testing with 1k x 1k matrix and density -1
 
-![test1](imgs/test2.png)
+![test1](test2.png)
 
 - testing with 10k x 10k matrix and density 10
 
-![test1](imgs/test1.png)
+![test1](test1.png)
 
 ---
 
@@ -132,10 +132,10 @@ void copyToBitFieldFromStr(int *bitField, char *str, int strSize, int index){
 
 <p>Nursultan Altayev</p>
 
-<img src="imgs/nurs.jpg">
+<img src="nurs.jpg">
 
 <p>Yerzhan Tolysbekk</p>
 
-<img src="imgs/erj.jpg">
+<img src="erj.jpg">
 
 ---
