@@ -87,7 +87,7 @@ int findBiggestSquare(int lines, int columns, int *bitField){
 
 ## Bitfields
 
--// using macros created integer data structure that holds bits
+- using macros created integer data structure that holds bits
 
 ```c
 #define SetBit(A,k)   ( A[(k/32)] |= (1 << (k%32)) )
