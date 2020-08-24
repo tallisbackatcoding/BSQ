@@ -25,7 +25,7 @@ $ ./bsq [input_file.txt]
 ## DynamicProgramming
 
 - Our algorithm uses Two-Dimensional array to store minimum values of its previous neighbours plus 1. 2D arrays might take a lot of space when size gets bigger. But we know that
-value for current cell is calculated from its adjacent previous neighbours and so on. So after we for example fill up the row on index 'k' we don't need the row on index 'k-1' anymore since the next row (k+1) will be filled by using the row on index 'k'. Therefore instead of creating 2D array of size 'rows * columns' we create only single dimensional arrays of 'columns' size each and consequetively filled each other using its neighbour. And obviously don't lose any data because we store the maximum value of cells in maxSquare and its index
+value for current cell is calculated from its adjacent previous neighbours and so on. So after we for example fill up the row on index 'k' we don't need the row on index 'k-1' anymore since the next row (k+1) will be filled by using the row on index 'k'. Therefore instead of creating 2D array of size 'rows * columns' we create only single dimensional arrays of 'columns' size each and consequetively fill each other using its neighbour. And obviously don't lose any data because we store the maximum value of cells in maxSquare and its index
 ```c
 
     int found_x = -1, found_y = -1;
