@@ -24,60 +24,55 @@ $ ./bsq [input_file.txt]
 
 ## DynamicProgramming
 
-- to prevent memory stackoverflow we just free the row that already been used
-
+- Our algorithm uses Two-Dimensional array to store minimum values of its previous neighbours plus 1. 2D arrays might take a lot of space when size gets bigger. But we know that
+value for current cell is calculated from its adjacent previous neighbours and so on. So after we for example fill up the row on index 'k' we don't need the row on index 'k-1' anymore since the next row (k+1) will be filled by using the row on index 'k'. Therefore instead of creating 2D array of size 'rows * columns' we create only single dimensional arrays of 'columns' size each and consequetively filled each other using its neighbour. And obviously don't lose any data because we store the maximum value of cells in maxSquare and its index
 ```c
 
-int findBiggestSquare(int lines, int columns, int *bitField){
-
     int found_x = -1, found_y = -1;
-    int **minValues = malloc(sizeof(int*)*(lines));
-    int maxSquare = 0;
+
+    int minValues1[columns];
+    int minValues2[columns];
+
+    int *currentMinVal;
+    int *aboveMinVal;
+
+    int flag = 0;
+    int maxSquareSize = 0;
+
     for(int i = 0; i < lines; i++){
-        minValues[i] = malloc(sizeof(int)*(columns));
+
+        if(flag == 0){
+            currentMinVal = minValues1;
+            aboveMinVal = minValues2;
+            flag = 1;
+        }else{
+            currentMinVal = minValues2;
+            aboveMinVal = minValues1;
+            flag = 0;
+        }
+
         for(int j = 0; j < columns; j++){
-            if(i == 0 ){
-                int test = i*columns + j;
-                if(TestBit(bitField, test)){
-                    minValues[i][j] = 1;
-                    if(maxSquare <= minValues[i][j]){
-                        maxSquare = minValues[i][j];
-                        found_x = i;
-                        found_y = j;
-                    }
+            int bitIndex = i*columns + j;
+
+            if(TestBit(bitField, bitIndex)){
+                if(i == 0){
+                    currentMinVal[j] = 1;
                 }else{
-                    minValues[i][j] = 0;
+                    if(j == 0){
+                        currentMinVal[j] = 1;
+                    }else{
+                        currentMinVal[j] = 1 + min(aboveMinVal[j-1], aboveMinVal[j], currentMinVal[j-1]);
+                    }
+                }
+
+                if(maxSquareSize <= currentMinVal[j]){
+                    maxSquareSize = currentMinVal[j];
+                    found_x = i;
+                    found_y = j;
                 }
             }else{
-                if(j == 0){
-                    int test = i*columns + j;
-                    if(TestBit(bitField, test)){
-                        minValues[i][j] = 1;
-                        if(maxSquare <= minValues[i][j]){
-                            maxSquare = minValues[i][j];
-                            found_x = i;
-                            found_y = j;
-                        }
-                    }else{
-                        minValues[i][j] = 0;
-                    }
-                }else{
-                    int test = i*columns + j;
-                    if(TestBit(bitField, test)){
-                        minValues[i][j] = 1 + min(minValues[i-1][j-1], minValues[i-1][j], minValues[i][j-1]);
-                        if(maxSquare <= minValues[i][j]){
-                            maxSquare = minValues[i][j];
-                            found_x = i;
-                            found_y = j;
-                        }
-                    }else{
-                        minValues[i][j] = 0;
-                    }
-                }
+                currentMinVal[j] = 0;
             }
-        }
-        if(i > 0){
-            free(minValues[i-1]);
         }
     }
 ```
@@ -87,7 +82,7 @@ int findBiggestSquare(int lines, int columns, int *bitField){
 
 ## Bitfields
 
-- using macros created integer data structure that holds bits
+- using macros created 32 integer data structure that holds bits
 
 ```c
 #define SetBit(A,k)   ( A[(k/32)] |= (1 << (k%32)) )
