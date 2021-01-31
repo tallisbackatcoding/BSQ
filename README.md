@@ -129,7 +129,7 @@ void copyToBitFieldFromStr(int *bitField, char *str, int strSize, int index){
 
 <img src="nurs.jpg" width = 200 height = 200>
 
-<p>Yerzhan Tolysbekk</p>
+<p>Yerzhan Tolysbek</p>
 
 <img src="erj.jpg" width = 200 height = 200>
 
